@@ -10,6 +10,14 @@ import streamlit as st
 from openai import OpenAI
 
 
+MODEL_OPTIONS = [
+    'gpt-4o-mini',
+    'gpt-4.1-mini',
+    'gpt-4.1',
+    'gpt-5-mini',
+    'gpt-5',
+]
+
 st.set_page_config(
     page_title="企业经营数据分析 Copilot",
     page_icon="📊",
@@ -247,7 +255,8 @@ def show_sidebar() -> None:
     st.sidebar.caption("支持 OpenAI 兼容接口，也支持第三方中转站。")
     st.sidebar.text_input("API Key", type="password", key="api_key")
     st.sidebar.text_input("Base URL", placeholder="例如：https://api.openai.com/v1", key="base_url")
-    st.sidebar.text_input("Model", placeholder="例如：gpt-4o-mini", key="model_name")
+    st.sidebar.selectbox("Model", MODEL_OPTIONS, index=0, key="model_name")
+    st.sidebar.caption("如需其他模型，可先告诉我，我再帮你加到下拉里。")
 
     col1, col2 = st.sidebar.columns(2)
     if col1.button("测试连接", use_container_width=True):
